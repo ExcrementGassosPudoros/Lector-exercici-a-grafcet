@@ -1,0 +1,21 @@
+# TIA Portal & Tools
+*.tmp
+*.log
+*.bak
+*.old
+
+# Brain & Agent artifacts
+.gemini/
+brain/
+*.md
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Web development
+node_modules/
+.env
+dist/
+.vscode/

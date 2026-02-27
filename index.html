@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ladder2Grafcet | TIA Portal Architect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+
+<body>
+    <div class="glow-bg"></div>
+    <div class="container">
+        <header>
+            <h1>LADDER<span style="color: var(--text-main); opacity: 0.5;">2</span>GRAFCET</h1>
+            <p class="subtitle">Senior Industrial Automation Architect - TIA Portal Edition</p>
+            <div class="api-config">
+                <input type="password" id="api-key" placeholder="Introduce tu Gemini API Key">
+                <button id="check-models-btn" title="Verificar modelos disponibles"
+                    style="margin-left: 5px; padding: 5px 10px; background: var(--secondary); border: none; border-radius: 5px; cursor: pointer; color: var(--bg-dark); font-size: 0.7rem;">🔍</button>
+            </div>
+        </header>
+
+        <main class="main-grid">
+            <section class="card">
+                <h2><span>⚡</span> Entrada Lógica</h1>
+                    <div class="input-tabs">
+                        <div class="input-tab active" data-type="text">Texto</div>
+                        <div class="input-tab" data-type="vision">Imagen (IA Vision)</div>
+                    </div>
+
+                    <div id="text-input-container">
+                        <textarea id="ladder-input" placeholder="Ejemplo:
+NW 1: Condición Inicial
+|--[ START ]--[ STOP_NC ]--| ( STEP_0 )"></textarea>
+                    </div>
+
+                    <div id="context-input-container" style="margin-top: 1rem;">
+                        <h3 style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 0.5rem;">Descripción
+                            Técnica / Enunciado (Contexto)</h3>
+                        <textarea id="exercise-context" style="height: 100px;"
+                            placeholder="Pega aquí el texto del ejercicio (ej. 'En las fiestas de Beniforatgran...'). El sistema usará esto para el análisis bilingüe y visual."></textarea>
+                    </div>
+
+                    <div id="vision-input-container" class="hidden">
+                        <div class="upload-zone" id="drop-zone">
+                            <input type="file" id="image-input" accept="image/*" multiple class="hidden">
+                            <div class="upload-icon">📸</div>
+                            <p>Arrastra o selecciona las capturas del ejercicio (Tags, Tiempos, Ladder)</p>
+                            <span style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem;">Soporta
+                                múltiples archivos simultáneos</span>
+                        </div>
+                        <div id="preview-grid" class="preview-grid hidden">
+                            <!-- Thumbnails will be injected here -->
+                        </div>
+                    </div>
+
+                    <button class="btn" id="analyze-btn">Procesar y Generar GRAFCET</button>
+            </section>
+
+            <section class="card">
+                <h2><span>🏷️</span> Tabla de Variables (Tags)</h2>
+                <div class="tag-table-container">
+                    <table id="tag-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Dirección</th>
+                                <th>Tipo</th>
+                                <th>Comentario</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tag-body">
+                            <!-- Tags aparecerán aquí -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2><span>📊</span> Visualización GRAFCET</h2>
+                <div class="visualization" id="grafcet-viz">
+                    <p style="color: var(--text-dim);">Introduce lógica Ladder para visualizar el GRAFCET</p>
+                </div>
+            </section>
+
+            <section class="card output-sources">
+                <h2><span>📂</span> Fuentes TIA Portal (SCL/AWL)</h2>
+                <div class="code-tabs">
+                    <div class="tab active" data-tab="ob1">OB1 [Main]</div>
+                    <div class="tab" data-tab="fb">FB [Grafcet]</div>
+                    <div class="tab" data-tab="fc">FC [Outputs]</div>
+                    <div class="tab" data-tab="db">DB [Global]</div>
+                </div>
+                <div class="source-container">
+                    <div class="copy-btn" id="copy-source">COPIAR CÓDIGO</div>
+                    <pre id="code-display"><code>// El código generado aparecerá aquí...</code></pre>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loader"></div>
+        <p>Analizando con IA Senior...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
